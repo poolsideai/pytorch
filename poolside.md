@@ -21,5 +21,7 @@ Right now we have two branches:
 We commit our changes to `poolside-main`.
 If we want to commit our changes to the upstream, we branch from `main` and cherry-pick the corresponding commits from `poolside-main`.
 
+The changes we made should be summarized in the [poolside-changes.md](poolside-changes.md) file.
+
 Feel free to contact Dmitrii Emelianenko or Vadim Markovtsev for any questions regarding this repo.
 

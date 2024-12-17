@@ -66,7 +66,7 @@ fi
 if [[ "$(uname)" == 'Darwin' ]] || [[ "$PACKAGE_TYPE" == conda ]]; then
   export PYTORCH_BUILD_VERSION="${BASE_BUILD_VERSION}"
 else
-  export PYTORCH_BUILD_VERSION="${BASE_BUILD_VERSION}+$DESIRED_CUDA"
+  export PYTORCH_BUILD_VERSION="${BASE_BUILD_VERSION}+poolside$DESIRED_CUDA"
 fi
 
 export PYTORCH_BUILD_NUMBER=1
@@ -166,7 +166,7 @@ EOL
 # nproc doesn't exist on darwin
 if [[ "$(uname)" != Darwin ]]; then
   # This was lowered from 18 to 12 to avoid OOMs when compiling FlashAttentionV2
-  MEMORY_LIMIT_MAX_JOBS=12
+  MEMORY_LIMIT_MAX_JOBS=32
   NUM_CPUS=$(( $(nproc) - 2 ))
 
   # Defaults here for **binary** linux builds so they can be changed in one place

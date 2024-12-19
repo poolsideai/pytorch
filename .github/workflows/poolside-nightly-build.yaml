@@ -134,6 +134,7 @@ jobs:
 
       - name: Build PyTorch binary
         run: |
+          echo "Building torch==$PYTORCH_BUILD_VERSION"
           set -x
           
           mkdir -p ${RUNNER_TEMP}/artifacts

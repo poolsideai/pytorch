@@ -51,7 +51,7 @@ PIP_UPLOAD_FOLDER='nightly/'
 # We put this here so that OVERRIDE_PACKAGE_VERSION below can read from it
 export DATE="$(date -u +%Y%m%d)"
 
-if [[-z $PYTORCH_BUILD_VERSION ]]; then
+if [[ -z "$PYTORCH_BUILD_VERSION" ]]; then
   BASE_BUILD_VERSION="$(cat ${PYTORCH_ROOT}/version.txt|cut -da -f1).dev${DATE}"
 
   # Change BASE_BUILD_VERSION to git tag when on a git tag

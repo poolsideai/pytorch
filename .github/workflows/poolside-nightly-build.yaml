@@ -202,7 +202,7 @@ jobs:
         run: |
           set -x
           python -m pip install --upgrade pip
-          python -m pip install twine
+          python -m pip install twine==6.1.0 packaging==24.2
           sudo npm install -g badgen-cli
 
       - name: Configure AWS credentials for publishing

@@ -96,8 +96,12 @@ jobs:
             echo "SHA1=${{ env.SHA1 }}"
             echo "MAX_JOBS=${{ env.MAX_JOBS }}"
             echo "TORCH_CUDA_ARCH_LIST=${{ env.TORCH_CUDA_ARCH_LIST }}"
-            DATE=$(date -u +%Y%m%d)
-            echo "PYTORCH_BUILD_VERSION=${{ env.PYTORCH_BUILD_VERSION_PREFIX }}.$DATE"
+            
+            BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+            # https://packaging.python.org/en/latest/specifications/version-specifiers/
+            VERSION=$(echo -n "${BRANCH_NAME/\//-}-${GITHUB_SHA:0:7}" | tr -C '[:alnum:].' '.')
+
+            echo "PYTORCH_BUILD_VERSION=${{ env.PYTORCH_BUILD_VERSION_PREFIX }}.$VERSION"
           } >> "$GITHUB_ENV"
 
       - name: Checkout PyTorch

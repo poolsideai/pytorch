@@ -141,6 +141,12 @@ else
     USE_RCCL=1
     USE_NCCL=1
     USE_KINETO=1
+
+    pushd third_party/nccl/nccl
+    mkdir -p headers/include
+    cd src
+    BUILDDIR=$(readlink -f ../headers) make $(readlink -f ../headers/include/nccl.h) $(readlink -f ../headers/include/nccl_net.h)
+    popd
 fi
 
 echo "Calling setup.py bdist at $(date)"

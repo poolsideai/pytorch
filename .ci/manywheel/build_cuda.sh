@@ -5,7 +5,7 @@ set -ex
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P ))"
 
 export TORCH_NVCC_FLAGS="-Xfatbin -compress-all"
-export NCCL_ROOT_DIR=/usr/local/cuda
+export NCCL_ROOT_DIR=/pytorch/third_party/nccl/nccl/headers
 export TH_BINARY_BUILD=1
 export USE_STATIC_CUDNN=1
 export USE_STATIC_NCCL=1
@@ -199,8 +199,8 @@ if [[ $CUDA_VERSION == "12.4" || $CUDA_VERSION == "12.6" ]]; then
         export ATEN_STATIC_CUDA=0
         export USE_CUDA_STATIC_LINK=0
         export USE_CUPTI_SO=1
-        export NCCL_INCLUDE_DIR="/usr/local/cuda/include/"
-        export NCCL_LIB_DIR="/usr/local/cuda/lib64/"
+        export NCCL_INCLUDE_DIR="/pytorch/third_party/nccl/nccl/headers/include"
+        #export NCCL_LIB_DIR="/usr/local/cuda/lib64/"
     fi
 elif [[ $CUDA_VERSION == "11.8" ]]; then
     export USE_STATIC_CUDNN=0
@@ -255,7 +255,6 @@ elif [[ $CUDA_VERSION == "11.8" ]]; then
             '$ORIGIN/../../nvidia/curand/lib'
             '$ORIGIN/../../nvidia/cusolver/lib'
             '$ORIGIN/../../nvidia/cusparse/lib'
-            '$ORIGIN/../../nvidia/nccl/lib'
             '$ORIGIN/../../nvidia/nvtx/lib'
         )
         CUDA_RPATHS=$(IFS=: ; echo "${CUDA_RPATHS[*]}")
@@ -267,8 +266,8 @@ elif [[ $CUDA_VERSION == "11.8" ]]; then
         export ATEN_STATIC_CUDA=0
         export USE_CUDA_STATIC_LINK=0
         export USE_CUPTI_SO=1
-        export NCCL_INCLUDE_DIR="/usr/local/cuda/include/"
-        export NCCL_LIB_DIR="/usr/local/cuda/lib64/"
+        export NCCL_INCLUDE_DIR="/pytorch/third_party/nccl/nccl/headers/include/"
+        #export NCCL_LIB_DIR="/usr/local/cuda/lib64/"
     fi
 else
     echo "Unknown cuda version $CUDA_VERSION"

@@ -52,7 +52,8 @@ class SocketOptions {
   }
 
  private:
-  bool prefer_ipv6_ = true;
+  // XXX: keeping this here for now, addressing separately upstream
+  bool prefer_ipv6_ = false;
   std::chrono::milliseconds connect_timeout_{std::chrono::seconds{30}};
   std::shared_ptr<Backoff> connect_backoff_{
       std::make_shared<FixedBackoff>(std::chrono::milliseconds(1000))};
